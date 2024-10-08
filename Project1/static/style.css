@@ -1,0 +1,27 @@
+body {
+    padding-top: 56px;
+}
+
+.jumbotron {
+    background-color: #f8f9fa;
+}
+
+.card {
+    min-height: 250px;
+}
+
+.navbar-brand {
+    font-weight: bold;
+}
+
+.btn-primary, .btn-secondary {
+    margin-right: 10px;
+}
+
+.badge-success {
+    background-color: #28a745;
+}
+
+.badge-danger {
+    background-color: #dc3545;
+}

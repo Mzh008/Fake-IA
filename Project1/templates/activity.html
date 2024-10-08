@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}{{ activity.name }} - Activities Management System{% endblock %}
+{% block content %}
+<h2>{{ activity.name }}</h2>
+<p>{{ activity.description }}</p>
+<form method="POST">
+    <button type="submit" class="btn btn-primary">Sign Up for this Activity</button>
+</form>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Activities - Activities Management System{% endblock %}
+{% block content %}
+<h2>Available Activities</h2>
+<div class="row">
+    {% for activity in activities %}
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">{{ activity.name }}</h5>
+                <p class="card-text">{{ activity.description }}</p>
+                {% if activity.id in user_signups %}
+                <button class="btn btn-success" disabled>Signed Up</button>
+                <a href="{{ url_for('feedback', activity_id=activity.id) }}" class="btn btn-secondary">Give Feedback</a>
+                {% else %}
+                <a href="{{ url_for('activity', activity_id=activity.id) }}" class="btn btn-primary">Sign Up</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Create Activity - Activities Management System{% endblock %}
+{% block content %}
+<h2>Create Activity</h2>
+<form method="POST">
+    <div class="form-group">
+        <label for="name">Activity Name</label>
+        <input type="text" class="form-control" name="name" required>
+    </div>
+    <div class="form-group">
+        <label for="description">Activity Description</label>
+        <textarea class="form-control" name="description" rows="4" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Create Activity</button>
+</form>
+{% endblock %}

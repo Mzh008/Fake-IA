@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Attendance for {{ activity.name }} - Activities Management System{% endblock %}
+{% block content %}
+<h2>Attendance - {{ activity.name }}</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Student Name</th>
+            <th>Username</th>
+            <th>Attendance Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for student in student_attendance %}
+        <tr>
+            <td>{{ student.name }}</td>
+            <td>{{ student.username }}</td>
+            <td>
+                {% if student.status == 'Present' %}
+                <span class="badge badge-success">Present</span>
+                {% elif student.status == 'Late' %}
+                <span class="badge badge-warning">Late</span>
+                {% elif student.status == 'Absent' %}
+                <span class="badge badge-danger">Absent</span>
+                {% else %}
+                <span class="badge badge-secondary">{{ student.status }}</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{{ url_for('mark_attendance_activity', activity_id=activity.id) }}" class="btn btn-primary">Edit Attendance</a>
+{% endblock %}

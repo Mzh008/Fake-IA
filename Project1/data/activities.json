@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1,
+        "name": "Chess Club",
+        "description": "Join us to play and learn chess."
+    },
+    {
+        "id": 2,
+        "name": "Science Club",
+        "description": "Explore the wonders of science."
+    },
+    {
+        "id": 3,
+        "name": "Drama Club",
+        "description": "Act, direct, and produce plays."
+    }
+]
+

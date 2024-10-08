@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <title>{% block title %}Activities Management System{% endblock %}</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="{{ url_for('home') }}">School Activities</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        {% if g.current_user %}
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('activities') }}">Activities</a>
+            </li>
+            {% if g.current_user.role in ['Teacher', 'Admin'] %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('create_activity') }}">Create Activity</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('attendance_overview') }}">Attendance Overview</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('mark_attendance') }}">Mark Attendance</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('dashboard') }}">Dashboard</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('attendance') }}">Attendance</a>
+            </li>
+            {% endif %}
+            {% if g.current_user.role == 'Admin' %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('manage_users') }}">Manage Users</a>
+            </li>
+            {% endif %}
+        </ul>
+        <span class="navbar-text mr-3">
+            Logged in as {{ g.current_user.username }} ({{ g.current_user.role }})
+        </span>
+        <a class="btn btn-outline-light mr-2" href="{{ url_for('manage_account') }}">Account</a>
+        <a class="btn btn-outline-light" href="{{ url_for('logout') }}">Logout</a>
+        {% else %}
+        <a class="btn btn-outline-light ml-auto" href="{{ url_for('login') }}">Login</a>
+        {% endif %}
+    </div>
+</nav>
+
+
+    <!-- Main Content -->
+    <div class="container mt-4">
+        {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</body>
+</html>

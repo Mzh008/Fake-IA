@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Manage Account - Activities Management System{% endblock %}
+{% block content %}
+<h2>Manage Account</h2>
+<form method="POST">
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" class="form-control" name="username" value="{{ user.username }}" disabled>
+    </div>
+    <div class="form-group">
+        <label for="role">Role</label>
+        <input type="text" class="form-control" name="role" value="{{ user.role }}" disabled>
+    </div>
+    <hr>
+    <div class="form-group">
+        <label for="name">Full Name</label>
+        <input type="text" class="form-control" name="name" value="{{ user.name }}" required>
+    </div>
+    <div class="form-group">
+        <label for="description">Description</label>
+        <textarea class="form-control" name="description">{{ user.description }}</textarea>
+    </div>
+    <div class="form-group">
+        <label for="grade">Grade</label>
+        <input type="text" class="form-control" name="grade" value="{{ user.grade }}">
+    </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+</form>
+{% endblock %}

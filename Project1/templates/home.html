@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Home - Activities Management System{% endblock %}
+{% block content %}
+<div class="jumbotron text-center">
+    <h1 class="display-4">Welcome to the School Activities Management System</h1>
+    <p class="lead">Manage your extracurricular activities efficiently.</p>
+    <hr class="my-4">
+    {% if not g.current_user %}
+    <a class="btn btn-primary btn-lg" href="{{ url_for('login') }}" role="button">Login</a>
+    <a class="btn btn-secondary btn-lg" href="{{ url_for('register') }}" role="button">Register</a>
+    {% else %}
+    <a class="btn btn-primary btn-lg" href="{{ url_for('activities') }}" role="button">View Activities</a>
+    {% endif %}
+</div>
+{% endblock %}

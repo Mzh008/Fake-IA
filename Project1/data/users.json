@@ -1,0 +1,18 @@
+[
+    {
+        "username": "admin",
+        "password": "scrypt:32768:8:1$XxgKwwsBbN2ZEeiL$32c980ee2e90d3233492ce661ba6cc14f3f47d24edd1197de9dd929456760d260e1a2caeca95e989c49add724c79a61626fedbbc0f8439c9f2e73d19d2faaa9e",
+        "role": "Admin",
+        "name": "Administrator",
+        "description": "",
+        "grade": ""
+    },
+    {
+        "username": "Mzh",
+        "password": "scrypt:32768:8:1$XxgKwwsBbN2ZEeiL$32c980ee2e90d3233492ce661ba6cc14f3f47d24edd1197de9dd929456760d260e1a2caeca95e989c49add724c79a61626fedbbc0f8439c9f2e73d19d2faaa9e",
+        "role": "Student",
+        "name": "Zihang Ma",
+        "description": "123",
+        "grade": "11"
+    }
+]

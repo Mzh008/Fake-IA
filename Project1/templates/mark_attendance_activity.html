@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Mark Attendance for {{ activity.name }} - Activities Management System{% endblock %}
+{% block content %}
+<h2>Mark Attendance - {{ activity.name }}</h2>
+<form method="POST">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Student Name</th>
+                <th>Username</th>
+                <th>Attendance Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in students %}
+            <tr>
+                <td>{{ student.name }}</td>
+                <td>{{ student.username }}</td>
+                <td>
+                    <select name="status_{{ student.username }}" class="form-control">
+                        <option value="Not Marked" {% if attendance_status[student.username] == 'Not Marked' %}selected{% endif %}>Not Marked</option>
+                        <option value="Present" {% if attendance_status[student.username] == 'Present' %}selected{% endif %}>Present</option>
+                        <option value="Late" {% if attendance_status[student.username] == 'Late' %}selected{% endif %}>Late</option>
+                        <option value="Absent" {% if attendance_status[student.username] == 'Absent' %}selected{% endif %}>Absent</option>
+                    </select>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <button type="submit" class="btn btn-primary">Save Attendance</button>
+</form>
+{% endblock %}

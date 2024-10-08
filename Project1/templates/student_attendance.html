@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block title %}Student Attendance Overview - Activities Management System{% endblock %}
+{% block content %}
+<h2>Student Attendance Overview</h2>
+
+<!-- Attendance Chart -->
+<h3>Attendance Summary</h3>
+<canvas id="attendanceChart" width="400" height="200"></canvas>
+
+<!-- Include Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    // Prepare data for overall attendance chart
+    var attendanceData = {{ student_attendance | tojson }};
+    var studentNames = attendanceData.map(function(sa) { return sa.name; });
+    var attendanceCounts = attendanceData.map(function(sa) {
+        return sa.attendance_records.filter(function(ar) { return ar.status === 'Present'; }).length;
+    });
+    var ctx = document.getElementById('attendanceChart').getContext('2d');
+    var attendanceChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: studentNames,
+            datasets: [{
+                label: 'Number of Activities Attended',
+                data: attendanceCounts,
+                backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        precision: 0
+                    }
+                }]
+            }
+        }
+    });
+</script>
+
+<h3 class="mt-4">Detailed Attendance</h3>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Student Name</th>
+            {% for activity in activities %}
+            <th>{{ activity.name }}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for student in student_attendance %}
+        <tr>
+            <td>{{ student.name }}</td>
+            {% for record in student.attendance_records %}
+            <td class="{% if record.status == 'Present' %}table-success{% else %}table-danger{% endif %}">
+                {{ record.status }}
+            </td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

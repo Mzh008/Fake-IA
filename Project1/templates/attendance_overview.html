@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Attendance Overview - Activities Management System{% endblock %}
+{% block content %}
+<h2>Attendance Overview</h2>
+<div class="row">
+    {% for activity in activities %}
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">{{ activity.name }}</h5>
+                <p class="card-text">{{ activity.description }}</p>
+                <a href="{{ url_for('activity_attendance', activity_id=activity.id) }}" class="btn btn-primary">View Attendance</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

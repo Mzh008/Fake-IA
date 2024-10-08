@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Manage Users - Activities Management System{% endblock %}
+{% block content %}
+<h2>Manage Users</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Grade</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.username }}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.role }}</td>
+            <td>{{ user.grade }}</td>
+            <td>
+                <form method="POST" class="form-inline">
+                    <input type="hidden" name="username" value="{{ user.username }}">
+                    <select name="role" class="form-control mr-2">
+                        <option value="Student" {% if user.role == 'Student' %}selected{% endif %}>Student</option>
+                        <option value="Teacher" {% if user.role == 'Teacher' %}selected{% endif %}>Teacher</option>
+                        <option value="Admin" {% if user.role == 'Admin' %}selected{% endif %}>Admin</option>
+                    </select>
+                    <button type="submit" class="btn btn-primary">Update Role</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

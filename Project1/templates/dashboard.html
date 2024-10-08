@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}Dashboard - Activities Management System{% endblock %}
+{% block content %}
+<h2>Coordinator Dashboard</h2>
+
+<!-- Attendance Chart -->
+<h3>Overall Attendance</h3>
+<canvas id="attendanceChart" width="400" height="200"></canvas>
+
+<!-- Include Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    var ctx = document.getElementById('attendanceChart').getContext('2d');
+    var chartData = {{ attendance_chart_data | safe }};
+    var attendanceChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: chartData.labels,
+            datasets: [{
+                label: 'Total Attendance',
+                data: chartData.data,
+                backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        precision: 0
+                    }
+                }]
+            }
+        }
+    });
+</script>
+
+<h3 class="mt-4">Recent Feedback</h3>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Activity</th>
+            <th>Student</th>
+            <th>Rating</th>
+            <th>Comments</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for fb in feedback %}
+        <tr>
+            <td>{{ activity_dict.get(fb.activity_id, 'Unknown Activity') }}</td>
+            <td>{{ fb.username }}</td>
+            <td>{{ fb.rating }}</td>
+            <td>{{ fb.comments }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
